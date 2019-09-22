@@ -110,7 +110,7 @@ $(document).ready(function () {
                 
                 for (i = 0; i < discover.results.length; i++) {
                     $('#imdb').append(
-                        '<section class="movie-box animated fadeIn slow">' +
+                        '<section class=\"movie-box animated fadeIn slow\" id=\"' + discover.results[i].id + '\">' +
                             '<div class=\"row\">' +
                                 '<div class="col-lg-6 col-sm-6 col-xs-12 pl-0 pr-0">' +
                                     '<div class="poster">' +
@@ -121,11 +121,15 @@ $(document).ready(function () {
                                     '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
                                     '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
                                     '<p class=\"overview\"><b>OVERVIEW:</b> ' + discover.results[i].overview + '</p>' +
+                                    '<p class=\"movie-id\"> ID: ' + discover.results[i].id + '</p>' +
+                                    '<p class=\"movie-cast\"><b>CAST:<\/b> </p>' +
                                 '</div>' +
                             '</div>' +
-                        '</section>'
+                        '</section>' 
                     );  
                 };
+
+                getCredits();
 
                 window.history.replaceState(null, null, "?release=" + releaseDate);
                 //$('#datepicker').val('');
@@ -164,7 +168,7 @@ $(document).ready(function () {
                                     '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
                                     '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
                                 '</div>'
-                            );  
+                            );   
                         };
 
                         //wallpaper
@@ -205,19 +209,26 @@ $(document).ready(function () {
 
     // get credits
     function getCredits() {
-        //var creditId = discover.results.id;
         
+        var movieBox = $('.movie-box .movie-cast');    
+        var movieId = $('.movie-box').attr('id');
+        console.log(movieBox.length);
+
         $.ajax({
             dataType: 'json',
-            url: "https://api.themoviedb.org/4/credit/&api_key=9afcbfc4caf1d317295d6506444725ca" + creditId,
-            success: function (credit, status) {
-                console.log("creditId: " + credit);
-                console.log(credit);
+            url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=9afcbfc4caf1d317295d6506444725ca",
+            success: function (movie, status) {
+                console.log(movie)
                 
-                for (i = 0; i < credit.results.length; i++) {
-                    $('.movie-details').append(
-                        '<p><b>RELEASE DATE:<\/b> ' + credit.credit_type + '</p>'
+                for (i = 0; i < $('.movie-box').length; i++) {
+
+                    var movieId = $($('.movie-box')[2]).attr('id');
+                    console.log(movieId);
+
+                    $(movieBox).append(
+                        movie.cast[i].name + ', '
                     );
+
                 }
             },
             error: function(status) {
