@@ -41,7 +41,7 @@
 
         </div>
 
-        <p class="text-center dateResult">Showing movies released on "<i></i>"</p>
+        <p class="text-center dateResult">Showing movies released on <br class="d-block d-sm-none" />"<i></i>"</p>
 
         <!-- SEARCH RESULTS -->
         <div id="imdb" data-page="1">
