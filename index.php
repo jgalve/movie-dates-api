@@ -38,10 +38,9 @@
             <section class="now-showing animated zoomInDown slow clear-fix">
                 <h3>NOW SHOWING: <a href="" class="text-right btn-nowshowing">VIEW ALL &raquo;</a></h3>
             </section>
-
         </div>
 
-        <p class="text-center dateResult">Showing movies released on <br class="d-block d-sm-none" />"<i></i>"</p>
+        <p class="text-center dateResult animated fadeIn delay-1s slow">Showing movies released on <br class="d-block d-sm-none" />"<i></i>"</p>
 
         <!-- SEARCH RESULTS -->
         <div id="imdb" data-page="1">
