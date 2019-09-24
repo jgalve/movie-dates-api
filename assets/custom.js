@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     console.log('jquery working!');
 
@@ -11,7 +11,7 @@ $(document).ready(function () {
         releaseParam.shift();
         console.log('releaseParam: ' + releaseParam)
 
-        if (url.indexOf('?release=') > 0 ) {
+        if (url.indexOf('?release=') > 0) {
             $('#datepicker').val(releaseParam);
             console.log('datepicker' + $('#datepicker').val());
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
     }
 
     //datepicker
-    $('#datepicker').datepicker({format: "yyyy-mm-dd"});
+    $('#datepicker').datepicker({ format: "yyyy-mm-dd" });
     $('#datepicker').on('changeDate', function() {
         $(this).val(
             $(this).datepicker('getFormattedDate')
@@ -49,9 +49,9 @@ $(document).ready(function () {
     })
 
     //submit button imdb
-    $('#submit').on('click', function (e) {
+    $('#submit').on('click', function(e) {
         e.preventDefault();
-        
+
         $('#imdb').attr('data-page', '1');
 
         removeInitialize();
@@ -67,16 +67,16 @@ $(document).ready(function () {
             'height': '80px'
         });
         $('.main-container').css({
-            'background-repeat':'repeat-y',
-            'background-size':'100%',
-            'background-position':'center top',
-            'padding-bottom' : '0px'
+            'background-repeat': 'repeat-y',
+            'background-size': '100%',
+            'background-position': 'center top',
+            'padding-bottom': '0px'
         });
-        
+
         $('#imdb').empty().css('min-height', 'calc(100vh - 60px)');
-        
+
         $('.now-showing').hide();
-        $('.bottom').removeClass('d-none');  
+        $('.bottom').removeClass('d-none');
     }
 
 
@@ -92,6 +92,7 @@ $(document).ready(function () {
         $('.dateResult').fadeIn(300);
         $('.dateResult i').text(releaseDate);
 
+
         //var releaseDate = $('#datepicker').val();
         var page = $('#imdb').attr('data-page');
         $('.main-title').css({
@@ -99,37 +100,54 @@ $(document).ready(function () {
             'margin-bottom': '8px',
             'margin-right': '35px !important'
         });
+
         
+
         $.ajax({
             dataType: 'json',
             async: true,
             url: "https://api.themoviedb.org/4/discover/movie?page=1&include_video=true&include_adult=true&sort_by=release_date.desc&language=en-US&api_key=c4a7e818fe724bcddb380f1c88cb8464&release_date.lte=" + releaseDate + '&page=' + page,
-            success: function (discover, status) {
+            success: function(discover, status) {
                 console.log("releaseDate: " + releaseDate);
                 console.log(discover);
-                
+
+                var releaseYear = releaseDate.slice(0, 4);
+
                 for (i = 0; i < discover.results.length; i++) {
                     $('#imdb').append(
                         '<section class=\"movie-box animated fadeIn slow\" id=\"' + discover.results[i].id + '\">' +
-                            '<div class=\"row\">' +
-                                '<div class="col-lg-6 col-sm-6 col-xs-12 pl-0 pr-0">' +
-                                    '<div class="poster">' +
-                                        '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="col-lg-6 col-sm-6 col-xs-12 pr-4 movie-details">' +
-                                    '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
-                                    '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
-                                    '<p class=\"overview\"><b>OVERVIEW:</b> ' + discover.results[i].overview + '</p>' +
-                                    '<p class=\"movie-id\"> ID: ' + discover.results[i].id + '</p>' +
-                                    '<p class=\"movie-cast\"><b>CAST:<\/b> </p>' +
-                                '</div>' +
+                        '<div class=\"row\">' +
+                        '<div class="col-lg-5 col-sm-4 col-12 pl-0 pr-0">' +
+                            '<a href=\"http://www.youtube.com/results?search_query=' + discover.results[i].original_title + ' ' + releaseYear + ' movie full\" target="_blank"><div class="poster">' +
+                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
+                            '</div> </a>' +
+                        '</div>' +
+                        '<div class="col-lg-7 col-sm-8 col-12 pr-4 movie-details">' +
+                            '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
+                            '<p class=\"release-date\"><span class="bday-cake"><i class="fas fa-birthday-cake d-none mr-2"></i></span><b>RELEASE DATE:</b> <time>' + discover.results[i].release_date + '</time></span></p>' +
+                            '<p class=\"overview\"><b>OVERVIEW:</b> ' + discover.results[i].overview + '</p>' +
+                            // '<p class=\"movie-id\"> ID: ' + discover.results[i].id + '</p>' +
+                            '<p class=\"movie-cast\"><b>CAST:<\/b> </p>' +
+                            '<p class=\"movie-crew\"><b>DIRECTOR:</b> </p>' +
+                            '<a href=\"http://www.youtube.com/results?search_query=' + discover.results[i].original_title + ' ' + releaseYear + ' movie full\" target="_blank"> <i class="fas fa-film"></i> WATCH MOVIE</a>' +
                             '</div>' +
-                        '</section>' 
-                    );  
+                        '</div>' +
+                        '</section>'
+                    );
+
+                    //bday cake
+                    $('.release-date').each(function(i) {
+                        //console.log('index' + i);
+                        if ($(this).text().indexOf(releaseDate) > 0) {
+                            $(this).find('.fa-birthday-cake').removeClass('d-none');
+                            //console.log('bday today!!!!');
+                        } else {
+                            //console.log('no bday today!!!!');
+                        }
+                    });
                 };
 
-                getCredits();
+                getCasting();
 
                 window.history.replaceState(null, null, "?release=" + releaseDate);
                 //$('#datepicker').val('');
@@ -152,23 +170,23 @@ $(document).ready(function () {
             dataType: 'json',
             async: true,
             url: "https://api.themoviedb.org/4/discover/movie?page=1&include_video=true&include_adult=true&sort_by=popularity.desc&language=en-US&api_key=c4a7e818fe724bcddb380f1c88cb8464&release_date.lte=" + releaseDate,
-            success: function (discover, status) {                      
-               
+            success: function(discover, status) {
+
                 //now showing
                 $.ajax({
                     dataType: 'json',
                     async: true,
                     url: "https://api.themoviedb.org/4/discover/movie?page=1&include_video=true&include_adult=true&sort_by=release_date.desc&language=en-US&api_key=c4a7e818fe724bcddb380f1c88cb8464&release_date.lte=" + releaseDate,
-                    success: function (discover, status) {                      
-                       
+                    success: function(discover, status) {
+
                         for (i = 0; i < 4; i++) {
                             $('.now-showing').append(
                                 '<div class="list">' +
-                                    '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
-                                    '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
-                                    '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
+                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
+                                '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
+                                '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
                                 '</div>'
-                            );   
+                            );
                         };
 
                         //wallpaper
@@ -207,33 +225,44 @@ $(document).ready(function () {
         $(window).scrollTop(0);
     });
 
-    // get credits
-    function getCredits() {
-        
-        var movieBox = $('.movie-box .movie-cast');    
-        var movieId = $('.movie-box').attr('id');
-        console.log(movieBox.length);
+    // get casting
+    function getCasting() {
+        $('.movie-box').each(function(y) {
+            //console.log('y ' + y);
+            var movieId = $(this).attr('id');
+            $('#' + movieId).each(function(z) {
+                //console.log('z ' + z);
 
-        $.ajax({
-            dataType: 'json',
-            url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=9afcbfc4caf1d317295d6506444725ca",
-            success: function (movie, status) {
-                console.log(movie)
-                
-                for (i = 0; i < $('.movie-box').length; i++) {
+                //get cast
+                $.ajax({
+                    dataType: 'json',
+                    url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=9afcbfc4caf1d317295d6506444725ca",
+                    success: function(movie, status) {
+                        //console.log(movie);
+                        //console.log('movieId ' + movieId);
 
-                    var movieId = $($('.movie-box')[2]).attr('id');
-                    console.log(movieId);
+                        for (x = 0; x < 5; x++) {
+                            $('#' + movieId).find('.movie-cast').append(
+                                movie.cast[x].name + ', '
+                            );  
+                        };
 
-                    $(movieBox).append(
-                        movie.cast[i].name + ', '
-                    );
+                        var json = movie.crew[0].name;
+                        var newJson = json.replace(undefined, "Not Available")
+                        $('#' + movieId).find('.movie-crew').append(newJson);
 
-                }
-            },
-            error: function(status) {
-                console.log('error: ' + status);
-            }
+                        console.log('crew ' + movie.crew[x].name);
+
+
+                    },
+                    error: function(status) {
+                        console.log('error status: ' + status);
+                    }
+                });
+                //end cast
+
+            });
         });
     };
+
 });
