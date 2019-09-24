@@ -129,7 +129,7 @@ $(document).ready(function() {
                             // '<p class=\"movie-id\"> ID: ' + discover.results[i].id + '</p>' +
                             '<p class=\"movie-cast\"><b>CAST:<\/b> </p>' +
                             '<p class=\"movie-crew\"><b>DIRECTOR:</b> </p>' +
-                            '<a href=\"http://www.youtube.com/results?search_query=' + discover.results[i].original_title + ' ' + releaseYear + ' movie full\" target="_blank"> <i class="fas fa-film"></i> WATCH MOVIE</a>' +
+                            '<a class="text-bold" href=\"http://www.youtube.com/results?search_query=' + discover.results[i].original_title + ' ' + releaseYear + ' movie full\" target="_blank"> <i class="fas fa-film"></i> WATCH MOVIE</a>' +
                             '</div>' +
                         '</div>' +
                         '</section>'

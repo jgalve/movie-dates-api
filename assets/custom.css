@@ -72,6 +72,8 @@ h1 {
     height: 45.5px;
 }
 
+.text-bold {font-weight:bold;}
+
 #submit {
     padding: 10px 17px;
     font-weight: bold;
@@ -120,7 +122,7 @@ h1 {
     content: "WATCH MOVIE \f008";
     font-family: "Font Awesome 5 Free";
     font-style: normal;
-    font-weight: 600;
+    font-weight: 900;
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -269,7 +271,7 @@ h1 {
     }
     .dateResult {
         font-size: 20px;
-        padding: 5px;
+        padding: 5px 15px;
     }
 }
 
