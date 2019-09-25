@@ -11,12 +11,14 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Atomic+Age&amp;display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha256-jO7D3fIsAq+jB8Xt3NI5vBf3k4tvtHwzp8ISLQG4UWU=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/33021d89fa.js" crossorigin="anonymous"></script>
     <link href="assets/custom.css" rel="stylesheet">
 
-    <title>MOVIE BIRTH DATES</title>
+    <title>Movie Time Machine</title>
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         <div class="search-bar centered animated fadeIn delay-1s slow" id="search-bar">
             <div class="pt-1 text-center">
                 <a href="./index.php">
-                    <h1 class="ml-3 mr-3 main-title">MOVIE BIRTH DATES</h1>
+                    <h1 class="ml-3 mr-3 main-title">Movie Time Machine</h1>
                 </a>
             </div>
 
@@ -38,9 +40,10 @@
             <section class="now-showing animated zoomInDown slow clear-fix">
                 <h3>NOW SHOWING: <a href="" class="text-right btn-nowshowing">VIEW ALL &raquo;</a></h3>
             </section>
+
         </div>
 
-        <p class="text-center dateResult animated fadeIn delay-1s slow">Showing movies released on <br class="d-block d-sm-none" />"<i></i>"</p>
+        <p class="text-center dateResult animated fadeIn delay-1s slow">Showing movies released on <br class="d-block d-sm-none" />" <i></i> "</p>
 
         <!-- SEARCH RESULTS -->
         <div id="imdb" data-page="1">

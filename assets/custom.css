@@ -7,7 +7,7 @@ a {color: #d4d656;}
 a:hover {
     text-decoration: none;
     color: #d4d656 !important;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 p {
@@ -19,11 +19,19 @@ p {
     box-shadow: none !important;
 }
 
-h1 {
+.text-bold {font-weight: bold;}
+
+.main-title {
     color: #f78926;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Atomic Age', cursive;
     text-shadow: 2px 2px 3px #000;
     font-size: 85px;
+}
+
+.main-title.mini {
+    font-size: 46px;
+    margin-bottom: 0px;
+    margin-right: 35px !important;
 }
 
 .title {
@@ -71,8 +79,6 @@ h1 {
     box-shadow: none !important;
     height: 45.5px;
 }
-
-.text-bold {font-weight:bold;}
 
 #submit {
     padding: 10px 17px;
@@ -122,7 +128,7 @@ h1 {
     content: "WATCH MOVIE \f008";
     font-family: "Font Awesome 5 Free";
     font-style: normal;
-    font-weight: 900;
+    font-weight: 600;
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -185,6 +191,11 @@ h1 {
     color: #00ffb8 !important;
 }
 
+.bottom .btn:focus {
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
 .dateResult {
     font-size: 20px;
     line-height: 30px;
@@ -204,7 +215,7 @@ h1 {
 .datepicker.datepicker-inline th,
 .datepicker.dropdown-menu td,
 .datepicker.dropdown-menu th {
-    padding: 6px 8px;
+    padding: 7px 10px;
     color: #fff;
 }
 
@@ -230,6 +241,8 @@ h1 {
     color: #000;
 }
 
+.datepicker table tr td.active, .datepicker table tr td:hover.active, .datepicker table tr td span.active.active {color: #000; background-image: none; background-color: #b5b73c !important;}
+
 @keyframes borderFlash {
     50% {
         border-color: #d0b141;
@@ -244,8 +257,11 @@ h1 {
     .movie-box {
         width: 50%;
     }
-    .search-bar h1 {
-        font-size: 35px !important;
+    .main-title.mini {
+        font-size: 42px;
+        margin-bottom: 8px;
+        margin-top: 10px;
+        margin-right: 1rem!important;
     }
 }
 
@@ -284,11 +300,20 @@ h1 {
     }
     #datepicker {
         margin-bottom: 10px;
+        margin-right: 0px !important;
     }
     #submit {
         width: 100%;
+        margin-bottom: 10px;
     }
     #imdb {
         padding: 0px 15px;
     }
+    .movie-details {padding: 0px;}
+    .main-title.mini {font-size: 33px;}
+    .datepicker.dropdown-menu {top: 168px !important;}
+}
+
+@media only screen and (max-width: 376px) {
+    .datepicker.dropdown-menu {top: 208px !important;}
 }

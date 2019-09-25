@@ -95,11 +95,7 @@ $(document).ready(function() {
 
         //var releaseDate = $('#datepicker').val();
         var page = $('#imdb').attr('data-page');
-        $('.main-title').css({
-            'font-size': '52px',
-            'margin-bottom': '8px',
-            'margin-right': '35px !important'
-        });
+        $('.main-title').addClass('mini');
 
         
 
@@ -119,7 +115,7 @@ $(document).ready(function() {
                         '<div class=\"row\">' +
                         '<div class="col-lg-5 col-sm-4 col-12 pl-0 pr-0">' +
                             '<a href=\"http://www.youtube.com/results?search_query=' + discover.results[i].original_title + ' ' + releaseYear + ' movie full\" target="_blank"><div class="poster">' +
-                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
+                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w500' + discover.results[i].poster_path + '\" />' +
                             '</div> </a>' +
                         '</div>' +
                         '<div class="col-lg-7 col-sm-8 col-12 pr-4 movie-details">' +
@@ -209,14 +205,17 @@ $(document).ready(function() {
     //next page
     $('.btn-showmore').on('click', function(e) {
         e.preventDefault();
+       
         var page = $('#imdb').attr('data-page');
         page = Number(page);
         page = page + 1;
         $('#imdb').attr('data-page', page);
-        //alert('current page' + $('#imdb').attr('data-page'));
+        
 
         var releaseDate = $('#datepicker').val();
         getMovie(releaseDate);
+
+        //$('html, body').animate({scrollTop: '+=350px'}, 800);
     });
 
     //scroll top
