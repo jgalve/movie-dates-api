@@ -42,6 +42,61 @@ $(document).ready(function() {
         console.log("datepicker: " + $(this).val());
     });
 
+    //date navigation back
+    $('.back10').on('click', function(e) {
+        e.preventDefault();
+        var releaseDate = $('#datepicker').val();
+        var releaseYear = releaseDate.slice(0, 4);
+        var releaseMonth = releaseDate.slice(4);
+        var decadeBack = (releaseYear - 10) + releaseMonth;
+
+        var releaseDate = $('#datepicker').val(decadeBack);
+        $('#imdb').empty();
+        getMovie(decadeBack);
+    })
+
+    //date navigation forward
+    $('.forward10').on('click', function(e) {
+        e.preventDefault();
+        var releaseDate = $('#datepicker').val();
+        var releaseYear = releaseDate.slice(0, 4);
+        var releaseMonth = releaseDate.slice(4);
+        var decadeForward = parseInt(releaseYear) + 10 + releaseMonth;
+
+        var releaseDate = $('#datepicker').val(decadeForward);
+        $('#imdb').empty();
+        getMovie(decadeForward);
+    })
+
+    //date navigation random
+    $('.randomDate').on('click', function(e) {
+        e.preventDefault();
+
+        var randomDate = rndDate('1930-01-01', '2050-12-31')
+        //alert(randomDate);
+        
+        function rndDate(fromDate, toDate) {
+            var from_ts = new Date(fromDate).getTime();
+            var to_ts   = new Date(toDate).getTime();
+              var fDate   = new Date(Math.floor(Math.random() * (to_ts - from_ts)) + from_ts);
+            return [
+                fDate.getFullYear(),
+                fDate.getMonth() < 9 ? '0' + (fDate.getMonth() + 1) : fDate.getMonth() +1,
+                fDate.getDate() < 10 ? '0' + fDate.getDate() : fDate.getDate()
+            ].join('-');
+        }
+
+        rndDate('1930-01-01', '2050-12-31')
+        
+        var releaseDate = $('#datepicker').val(randomDate);
+        $('#imdb').empty();
+        //setTimeout(function(){ getMovie(releaseDate); }, 1000);
+
+        $('#submit').click();
+        
+    })
+
+
     //click now showing
     $('.btn-nowshowing').on('click', function(e) {
         e.preventDefault();
@@ -92,12 +147,12 @@ $(document).ready(function() {
         $('.dateResult').fadeIn(300);
         $('.dateResult i').text(releaseDate);
 
+        $('.dateNav').fadeIn(300);
+
 
         //var releaseDate = $('#datepicker').val();
         var page = $('#imdb').attr('data-page');
         $('.main-title').addClass('mini');
-
-        
 
         $.ajax({
             dataType: 'json',
@@ -178,9 +233,9 @@ $(document).ready(function() {
                         for (i = 0; i < 4; i++) {
                             $('.now-showing').append(
                                 '<div class="list">' +
-                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w342' + discover.results[i].poster_path + '\" />' +
+                                '<img class="img-fluid" src=\"https://image.tmdb.org/t/p/w500' + discover.results[i].poster_path + '\" />' +
                                 '<p class=\"title\">' + discover.results[i].original_title + '</p>' +
-                                '<p class=\"release-date\"><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
+                                '<p class=\"release-date\"><i class=\"fas fa-birthday-cake bday-cake mr-2\"></i><b>RELEASE DATE:</b> ' + discover.results[i].release_date + '</p>' +
                                 '</div>'
                             );
                         };
@@ -242,16 +297,17 @@ $(document).ready(function() {
 
                         for (x = 0; x < 5; x++) {
                             $('#' + movieId).find('.movie-cast').append(
-                                movie.cast[x].name + ', '
+                                '<span class="actor">' + movie.cast[x].name + '</span>'
                             );  
                         };
-
+                   
                         var json = movie.crew[0].name;
-                        var newJson = json.replace(undefined, "Not Available")
-                        $('#' + movieId).find('.movie-crew').append(newJson);
+                        var newJson = json.replace(/null/g, "Not Available")
+                        $('#' + movieId).find('.movie-crew').append(newJson); 
 
-                        console.log('crew ' + movie.crew[x].name);
+                        //console.log('crew ' + movie.crew[x].name);
 
+                        $(this).find('.movie-cast').text().slice(0, -1);
 
                     },
                     error: function(status) {
@@ -259,6 +315,8 @@ $(document).ready(function() {
                     }
                 });
                 //end cast
+
+                
 
             });
         });

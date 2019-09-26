@@ -35,6 +35,13 @@
             <form class="form-inline text-center align-items-center justify-content-center form-search">
                 <input type="text" class="form-control mr-2 text-center" id="datepicker" value="" placeholder="Enter a date" required />
                 <button type="submit" id="submit" class="btn btn-primary ">SEARCH</button>
+
+                <section class="dateNav">
+                    <a href="#" class="back10"><i class="fas fa-arrow-circle-left "></i> DECADE BACK</a>
+                    <a href="#" class="forward10"><i class="fas fa-arrow-circle-right "></i> DECADE FORWARD</a>
+                    <a href="#" class="randomDate"><i class="fas fa-dharmachakra"></i> RANDOM DATE</a>
+                </section>
+                
             </form>
 
             <section class="now-showing animated zoomInDown slow clear-fix">
@@ -43,7 +50,9 @@
 
         </div>
 
-        <p class="text-center dateResult animated fadeIn delay-1s slow">Showing movies released on <br class="d-block d-sm-none" />" <i></i> "</p>
+        <p class="text-center dateResult animated fadeIn delay-1s slow">
+            Showing movies released on <br class="d-block d-sm-none" />" <i></i> "
+        </p>
 
         <!-- SEARCH RESULTS -->
         <div id="imdb" data-page="1">

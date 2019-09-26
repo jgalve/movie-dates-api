@@ -40,7 +40,7 @@ p {
     line-height: 27px;
     border-bottom: 1px solid #909090;
     padding: 2px 0px 7px 0px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     color: #00f2fe;
 }
 
@@ -69,15 +69,15 @@ p {
 #datepicker {
     background: #000000;
     color: #d0b141;
-    border: 4px dotted #000;
-    animation: borderFlash 2s infinite;
+    border: 1px solid #00feb7;
+    box-shadow: 0px 0px 7px #00feb7;
+    animation: borderFlash 1s infinite;
     font-weight: bold;
     font-size: 23px;
     padding: 5px;
     letter-spacing: 5px;
     line-height: 14px;
-    box-shadow: none !important;
-    height: 45.5px;
+    height: 44px;
 }
 
 #submit {
@@ -87,6 +87,9 @@ p {
     border: #00ffb8;
     color: #2f2f2f;
 }
+
+.dateNav {display: none;}
+.dateNav a {margin-left: 40px; color: #d656c4; font-weight: bold;}
 
 #imdb {
     background: rgba(0, 0, 0, 0.7);
@@ -105,6 +108,16 @@ p {
     width: 33.333%;
     padding: 0px 15px;
     margin: 20px 0px;
+}
+
+.movie-cast .actor {margin-right: 5px;}
+.movie-cast .actor:last-child:after {
+    content: '';
+    position: relative;
+}
+.movie-cast .actor:after {
+    content: ',';
+    position: relative;
 }
 
 .poster {
@@ -162,6 +175,8 @@ p {
     text-align: center;
     vertical-align: top;
 }
+
+.now-showing .list img {margin-bottom: 6px;}
 
 .now-showing h3 {
     margin: 10px 15px;
@@ -241,19 +256,34 @@ p {
     color: #000;
 }
 
-.datepicker table tr td.active, .datepicker table tr td:hover.active, .datepicker table tr td span.active.active {color: #000; background-image: none; background-color: #b5b73c !important;}
+.datepicker table tr td.active, .datepicker table tr td:hover.active, .datepicker table tr td span.active.active {
+    color: #000; background-image: none; 
+    background-color: #b5b73c !important;}
 
 @keyframes borderFlash {
-    50% {
+    25% {
         border-color: #d0b141;
         box-shadow: 0px 0px 7px #d0b141;
     }
+    50% {
+        border-color: #d656c4;
+        box-shadow: 0px 0px 7px #d656c4;
+    }
+    75% {
+        border-color: #ff6f00;
+        box-shadow: 0px 0px 7px #ff6f00;
+    }
+}
+
+@media only screen and (max-width: 1580px) {
+    .main-title.mini {font-size: 35px;}
+    #datepicker {width: 214px;}
+    .dateNav a {margin-left: 30px;}
 }
 
 
-/* Large devices (laptops/desktops, 992px and up) */
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1317px) {
     .movie-box {
         width: 50%;
     }
@@ -263,15 +293,22 @@ p {
         margin-top: 10px;
         margin-right: 1rem!important;
     }
+
+    #datepicker {width: auto; margin-bottom: 15px;}
+    #submit {margin-bottom: 15px;}
+    .dateNav a {margin-left: 10px;
+        margin: 4px 11px 5px;
+        display: inline-block;}
 }
 
 
 /* Medium devices (landscape tablets, 768px and up) */
-
 @media only screen and (max-width: 769px) {
     .movie-box {
         width: 100%;
     }
+    #datepicker {width: auto;}
+    .movie-details {padding-right: 0px !important;}
     .title {
         font-size: 22px;
     }
@@ -295,12 +332,15 @@ p {
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 600px) {
+    .now-showing {text-align: center;}
     .movie-box {
         width: 100%;
     }
+    .movie-details {padding: 0px;}
     #datepicker {
         margin-bottom: 10px;
         margin-right: 0px !important;
+        width: 100%;
     }
     #submit {
         width: 100%;
@@ -309,9 +349,14 @@ p {
     #imdb {
         padding: 0px 15px;
     }
-    .movie-details {padding: 0px;}
+
     .main-title.mini {font-size: 33px;}
     .datepicker.dropdown-menu {top: 168px !important;}
+
+    .main-title {
+        font-size: 30px;
+        margin: 13px auto;
+    }
 }
 
 @media only screen and (max-width: 376px) {
