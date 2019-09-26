@@ -62,14 +62,14 @@
         </div>
 
         <!-- BOTTOM BUTTONS -->
-        <div class="text-center px-3 py-3 bottom d-none mb-2">
+        <div class="text-center px-3 py-3 bottom d-none">
             <button class="btn btn-primary btn-showmore mx-2"> SHOW MORE </button>
             <a href="#search-bar" class="btn btn-primary btn-backsearch mx-2">BACK TO TOP</a>
         </div>
 
-        <p class="text-center">
-            <div class="sharethis-inline-share-buttons"></div>asdasd
-        </p>
+        <footer class="text-center" style="background: #000; padding: 12px;">
+            <div class="text-center sharethis-inline-share-buttons" style="background: #000;"></div>
+        </footer>
 
     </main>
 
